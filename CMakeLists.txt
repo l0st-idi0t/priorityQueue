@@ -17,13 +17,19 @@ set(Headers
 )
 
 set(Sources
-
+    tests.cpp
 )
 
 add_library(${This}) STATIC ${Sources} ${Headers}
+add_executable(${This} ${Sources})
 
-add_subdirectory(test)
+target_link_libraries(${This} PUBLIC
+    gtest_main
+    priorityQueue
+)
 
-
-
+add_test(
+    NAME ${This}
+    COMMAND ${This}
+)
 
