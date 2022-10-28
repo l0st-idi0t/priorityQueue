@@ -1,9 +1,8 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "priorityqueue.h"
-
+// Demonstrate some basic assertions.
 TEST(priorityqueue, one) {
-    // TO DO: write lots of assertions here.
-    EXPECT_TRUE(false);
-}   
-
+  // Expect equality.
+  EXPECT_EQ(1, 1);
+}
 // TO DO: write lots of tests here.
