@@ -21,6 +21,7 @@ private:
         NODE* left;  // links to left child
         NODE* right;  // links to right child
     };
+    
     NODE* root;  // pointer to root node of the BST
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
