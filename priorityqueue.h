@@ -26,7 +26,15 @@ private:
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
 
-    void _recursiveFunction(NODE* node, ostream &output);
+    void _recursiveFunction(NODE* node, ostream &output) {
+        if (node == nullptr) return;
+
+        _recursiveFunction(node->left, output);
+        output << node->priority << " value: " << node->value << endl;
+
+        _recursiveFunction(node->link, output);
+        _recursiveFunction(node->right, output);
+    }
 
 public:
     //
@@ -219,14 +227,13 @@ public:
     //  2 value: Sven
     //  3 value: Gwen"
     //
-    string toString() {
-        
-        
+    string toString() {        
         // TO DO: write this function.
-        string str = "";
-        return str; // TO DO: update this return
+        stringstream result;
+        _recursiveFunction(root, result);
         
-        
+        return result.str();
+
     }
     
     //
