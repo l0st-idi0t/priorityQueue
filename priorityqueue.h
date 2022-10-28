@@ -33,11 +33,10 @@ public:
     // O(1)
     //
     priorityqueue() {
-        
-        
         // TO DO: write this function.
-        
-        
+        size = 0;
+        root = nullptr;
+        curr = nullptr;
     }
     
     //
@@ -93,9 +92,46 @@ public:
     // duplicate priorities
     //
     void enqueue(T value, int priority) {
-        
-        
+
+        struct NODE {
+            int priority;  // used to build BST
+            T value;  // stored data for the p-queue
+            bool dup;  // marked true when there are duplicate priorities
+            NODE* parent;  // links back to parent
+            NODE* link;  // links to linked list of NODES with duplicate priorities
+            NODE* left;  // links to left child
+            NODE* right;  // links to right child
+        };
+
         // TO DO: write this function.
+        NODE* prev = nullptr;
+        NODE* cur = root;
+        NODE* n = new NODE;
+      
+        while (cur != nullptr) {
+            if (priority == cur->priority) {
+                cur->dup = true;
+                prev = cur;
+                cur = cur->link;
+            }else if (priority > cur->priority) {
+                prev = cur;
+                cur = cur->right;
+            }else {
+                prev = cur;
+                cur = cur->left;
+            }
+        }
+
+        n->priority = priority;
+        n->value = value;
+        n->dup = false;
+        n->parent = prev;
+        n->left = nullptr;
+        n->right = nullptr;
+        n->link = nullptr;
+       
+        cur = n;
+
         
         
     }
@@ -126,7 +162,7 @@ public:
     int Size() {
         
         
-        return 0; // TO DO: update this return
+        return size; // TO DO: update this return
         
         
     }
