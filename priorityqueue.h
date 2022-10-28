@@ -26,6 +26,8 @@ private:
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
 
+    void _recursiveFunction(NODE* node, ostream &output);
+
 public:
     //
     // default constructor:
@@ -94,7 +96,7 @@ public:
     //
     void enqueue(T value, int priority) {
         // TO DO: write this function.        
-        
+
         NODE* prev = nullptr;
         NODE* curr = root;
         NODE* n = new NODE;
