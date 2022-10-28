@@ -96,6 +96,22 @@ TEST(priorityqueue, sizeCheck) {
   doubleDups.enqueue(5.5, 8);
   doubleDups.enqueue(6.6, 11);
 
+  cout << doubleDups.toString() << " is the result" << endl;
   EXPECT_EQ(6, doubleDups.Size());
 }
 // TO DO: write lots of tests here.
+
+TEST(priorityqueue, toStringChecks) {
+  //dups test: double
+  priorityqueue<double> doubleDups;
+
+  doubleDups.enqueue(1.1, 5);
+  // doubleDups.enqueue(2.2, 5);
+  // doubleDups.enqueue(3.3, 8);
+  // doubleDups.enqueue(4.4, 8);
+  // doubleDups.enqueue(5.5, 8);
+  // doubleDups.enqueue(6.6, 11);
+
+  cout << doubleDups.toString() << " is the result" << endl;
+  EXPECT_EQ("5 value: 1.1", doubleDups.toString());
+}
