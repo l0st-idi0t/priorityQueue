@@ -24,7 +24,32 @@ private:
     NODE* root;  // pointer to root node of the BST
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
-    
+
+    void helperInsert(NODE* node, T value, int priority) {
+        if (node == nullptr) {
+            root = new NODE;
+            root->value = value;
+            root->priority = priority;
+            root->left = nullptr;
+            root->right = nullptr;
+            root->link = nullptr;
+            root->dup = false;
+            root->parent = nullptr;
+            return;
+        }
+
+        if (priority < node->priority) {
+            node->left = helperInsert(node->left, value, priority);
+        }else {
+            node->right = helperInsert(node->right, value, priority);
+        }
+
+
+        //very end
+        size++;
+
+    }
+
 public:
     //
     // default constructor:
@@ -92,47 +117,8 @@ public:
     // duplicate priorities
     //
     void enqueue(T value, int priority) {
-
-        struct NODE {
-            int priority;  // used to build BST
-            T value;  // stored data for the p-queue
-            bool dup;  // marked true when there are duplicate priorities
-            NODE* parent;  // links back to parent
-            NODE* link;  // links to linked list of NODES with duplicate priorities
-            NODE* left;  // links to left child
-            NODE* right;  // links to right child
-        };
-
         // TO DO: write this function.
-        NODE* prev = nullptr;
-        NODE* cur = root;
-        NODE* n = new NODE;
-      
-        while (cur != nullptr) {
-            if (priority == cur->priority) {
-                cur->dup = true;
-                prev = cur;
-                cur = cur->link;
-            }else if (priority > cur->priority) {
-                prev = cur;
-                cur = cur->right;
-            }else {
-                prev = cur;
-                cur = cur->left;
-            }
-        }
-
-        n->priority = priority;
-        n->value = value;
-        n->dup = false;
-        n->parent = prev;
-        n->left = nullptr;
-        n->right = nullptr;
-        n->link = nullptr;
-       
-        cur = n;
-
-        
+        helperInsert(root, value, priority);
         
     }
     //
