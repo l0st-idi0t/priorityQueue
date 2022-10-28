@@ -26,31 +26,6 @@ private:
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
 
-    void helperInsert(NODE* node, T value, int priority) {
-        if (node == nullptr) {
-            root = new NODE;
-            root->value = value;
-            root->priority = priority;
-            root->left = nullptr;
-            root->right = nullptr;
-            root->link = nullptr;
-            root->dup = false;
-            root->parent = nullptr;
-            return;
-        }
-
-        if (priority < node->priority) {
-            node->left = helperInsert(node->left, value, priority);
-        }else {
-            node->right = helperInsert(node->right, value, priority);
-        }
-
-
-        //very end
-        size++;
-
-    }
-
 public:
     //
     // default constructor:
@@ -118,9 +93,35 @@ public:
     // duplicate priorities
     //
     void enqueue(T value, int priority) {
-        // TO DO: write this function.
-        helperInsert(root, value, priority);
+        // TO DO: write this function.        
         
+        NODE* prev = nullptr;
+        NODE* curr = root;
+        NODE* n = new NODE;
+
+        while (curr != nullptr) {
+            if (priority == curr->priority) {
+                curr->dup = true;
+                curr->link = n;
+            }else if (priority > curr->priority) {
+                prev = curr;
+                curr = curr->right;
+            }else {
+                prev = curr;
+                curr = curr->left;
+            }
+        }
+
+        n->priority = priority;
+        n->value = value;
+        n->dup = false;
+        n->parent = prev;
+        n->link = nullptr;
+        n->left = nullptr;
+        n->right = nullptr;
+
+
+        size++;
     }
     //
     // dequeue:
@@ -147,8 +148,7 @@ public:
     // O(1)
     //
     int Size() {
-        
-        
+
         return size; // TO DO: update this return
         
         

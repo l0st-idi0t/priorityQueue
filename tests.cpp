@@ -11,6 +11,7 @@ TEST(priorityqueue, sizeCheck) {
   pq.enqueue(8, 2);
   pq.enqueue(9, 6);
   pq.enqueue(1, 11);
+
   EXPECT_EQ(6, pq.Size());
 }
 // TO DO: write lots of tests here.
