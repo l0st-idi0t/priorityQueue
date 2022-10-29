@@ -56,6 +56,16 @@ private:
         equalHelper(node->right);
     }
 
+    bool equalityHelper(NODE* node, NODE* otherNode) {
+        if (node != otherNode) return false;
+
+        equalHelper(node->left, otherNode->left);
+        equalHelper(node->link, otherNode->link);
+        equalHelper(node->right, otherNode->right);
+
+        return true;
+    }
+
 public:
     //
     // default constructor:
@@ -254,7 +264,15 @@ public:
     //
     bool next(T& value, int &priority) {
         // TO DO: write this function.
+        if (curr == nullptr) return false;
 
+        if (curr->link != nullptr) {
+          curr = curr->link;
+        }else if (curr->right != nullptr) {
+            curr = curr->right;
+        }else if (curr->parent != nullptr) {
+          curr = curr->parent;
+        }
 
         return true; // TO DO: update this return
         
@@ -305,11 +323,12 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     bool operator==(const priorityqueue& other) const {
-        
-        
         // TO DO: write this function.
-        return true; // TO DO: update this return
-        
+        if (this == &other) {
+            return true;
+        }
+
+        return equalityHelper(root, other.root);
         
     }
     
