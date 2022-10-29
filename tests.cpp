@@ -105,7 +105,6 @@ TEST(priorityqueue, sizeCheck) {
 
   EXPECT_EQ(6, doubleDups.Size());
 }
-// TO DO: write lots of tests here.
 
 TEST(priorityqueue, toStringChecks) {
   //random test: int
@@ -157,7 +156,6 @@ TEST(priorityqueue, toStringChecks) {
   pq2.clear();
   EXPECT_EQ("", pq2.toString());
 }
-
 
 TEST(priorityqueue, clearChecks) {
 

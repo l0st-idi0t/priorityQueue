@@ -1,6 +1,4 @@
 // priorityqueue.h
-//
-// TODO:  write this header comment
 #pragma once
 
 #include <iostream>
@@ -74,7 +72,6 @@ public:
     // O(1)
     //
     priorityqueue() {
-        // TO DO: write this function.
         size = 0;
         root = nullptr;
         curr = nullptr;
@@ -88,7 +85,6 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     priorityqueue& operator=(const priorityqueue& other) {
-        // TO DO: write this function.
         if (this == &other) {
             return *this;
         }
@@ -107,7 +103,6 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     void clear() {
-        // TO DO: write this function.
         deleteTree(root);
         root = nullptr;
         curr = nullptr;
@@ -134,7 +129,6 @@ public:
     // duplicate priorities
     //
     void enqueue(T value, int priority) {
-        // TO DO: write this function.        
 
         NODE* prev = nullptr;
         NODE* cur = root;
@@ -190,7 +184,6 @@ public:
     //
     T dequeue() {
         
-        
         // TO DO: write this function.
         T valueOut;
         return valueOut; // TO DO: update this return
@@ -205,9 +198,7 @@ public:
     // O(1)
     //
     int Size() {
-
-        return size; // TO DO: update this return
-        
+        return size;
         
     }
     
@@ -228,8 +219,6 @@ public:
     //    }
     //    cout << priority << " value: " << value << endl;
     void begin() {
-        
-        // TO DO: write this function.
         
         curr = root;
 
@@ -274,7 +263,7 @@ public:
           curr = curr->parent;
         }
 
-        return true; // TO DO: update this return
+        return true; 
         
         
     }
@@ -289,7 +278,7 @@ public:
     //  3 value: Gwen"
     //
     string toString() {        
-        // TO DO: write this function.
+
         stringstream result;
         _recursiveFunction(root, result);
         
@@ -307,7 +296,6 @@ public:
     //
     T peek() {
         
-        
         // TO DO: write this function.
         T valueOut;
         return valueOut; // TO DO: update this return
@@ -323,7 +311,7 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     bool operator==(const priorityqueue& other) const {
-        // TO DO: write this function.
+
         if (this == &other) {
             return true;
         }
@@ -332,9 +320,7 @@ public:
         
     }
     
-    //
-    // getRoot - Do not edit/change!
-    //
+    
     // Used for testing the BST.
     // return the root node for testing.
     //
