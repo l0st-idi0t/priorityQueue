@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <set>
+#include <string>
 
 using namespace std;
 
@@ -26,14 +27,26 @@ private:
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
 
+    int counter = 0;
     void _recursiveFunction(NODE* node, ostream &output) {
         if (node == nullptr) return;
 
         _recursiveFunction(node->left, output);
         output << node->priority << " value: " << node->value << endl;
-
+        counter++;
         _recursiveFunction(node->link, output);
         _recursiveFunction(node->right, output);
+    }
+
+    void deleteTree(NODE* node) {
+        if (node == nullptr) return;
+
+        deleteTree(node->left);
+        if (node->link != nullptr) deleteTree(node->link);
+        deleteTree(node->right);
+
+        delete node;
+        size--;
     }
 
 public:
@@ -73,11 +86,10 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     void clear() {
-        
-        
         // TO DO: write this function.
-        
-        
+        deleteTree(root);
+        root = nullptr;
+        curr = nullptr;
     }
     
     //
@@ -87,8 +99,6 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     ~priorityqueue() {
-        
-        
         // TO DO: write this function.
         
         
@@ -106,19 +116,24 @@ public:
         // TO DO: write this function.        
 
         NODE* prev = nullptr;
-        NODE* curr = root;
+        NODE* cur = root;
         NODE* n = new NODE;
 
-        while (curr != nullptr) {
-            if (priority == curr->priority) {
-                curr->dup = true;
-                curr->link = n;
-            }else if (priority > curr->priority) {
-                prev = curr;
-                curr = curr->right;
+        while (cur != nullptr) {
+            if (priority == cur->priority) {
+                cur->dup = true;
+                while (cur->link != nullptr) {
+                    cur = cur->link;
+                }
+                cur->link = n;
+                prev = nullptr;
+                cur = nullptr;
+            }else if (priority > cur->priority) {
+                prev = cur;
+                cur = cur->right;
             }else {
-                prev = curr;
-                curr = curr->left;
+                prev = cur;
+                cur = cur->left;
             }
         }
 
@@ -130,6 +145,17 @@ public:
         n->left = nullptr;
         n->right = nullptr;
 
+        if (root == nullptr) {
+            root = n;
+        }
+
+        if (prev != nullptr) {
+            if (priority > prev->priority) {
+                prev->right = n;
+            }else {
+                prev->left = n;
+            }
+        }
 
         size++;
     }
@@ -236,6 +262,9 @@ public:
 
     }
     
+    int getCounter() {
+        return this->counter;
+    }
     //
     // peek:
     //
