@@ -71,8 +71,6 @@ public:
     // O(n), where n is total number of nodes in custom BST
     //
     priorityqueue& operator=(const priorityqueue& other) {
-        
-        
         // TO DO: write this function.
         return *this;
         
