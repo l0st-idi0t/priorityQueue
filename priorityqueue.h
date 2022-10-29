@@ -27,13 +27,11 @@ private:
     int size;  // # of elements in the pqueue
     NODE* curr;  // pointer to next item in pqueue (see begin and next)
 
-    int counter = 0;
     void _recursiveFunction(NODE* node, ostream &output) {
         if (node == nullptr) return;
 
         _recursiveFunction(node->left, output);
         output << node->priority << " value: " << node->value << endl;
-        counter++;
         _recursiveFunction(node->link, output);
         _recursiveFunction(node->right, output);
     }
@@ -47,6 +45,15 @@ private:
 
         delete node;
         size--;
+    }
+
+    void equalHelper(NODE* node) {
+        if (node == nullptr) return;
+
+        equalHelper(node->left);
+        enqueue(node->value, node->priority);
+        equalHelper(node->link);
+        equalHelper(node->right);
     }
 
 public:
@@ -72,9 +79,15 @@ public:
     //
     priorityqueue& operator=(const priorityqueue& other) {
         // TO DO: write this function.
+        if (this == &other) {
+            return *this;
+        }
+
+        clear();
+
+        equalHelper(other.root);
+
         return *this;
-        
-        
     }
     
     //
@@ -206,10 +219,16 @@ public:
     //    cout << priority << " value: " << value << endl;
     void begin() {
         
-        
         // TO DO: write this function.
         
-        
+        curr = root;
+
+        if(curr != nullptr) {
+            while (curr->left != nullptr) {
+                curr = curr->left;
+            }
+        }
+
     }
     
     //
@@ -234,9 +253,9 @@ public:
     //    cout << priority << " value: " << value << endl;
     //
     bool next(T& value, int &priority) {
-        
-        
         // TO DO: write this function.
+
+
         return true; // TO DO: update this return
         
         
@@ -259,10 +278,7 @@ public:
         return result.str();
 
     }
-    
-    int getCounter() {
-        return this->counter;
-    }
+
     //
     // peek:
     //

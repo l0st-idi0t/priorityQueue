@@ -297,3 +297,56 @@ TEST(priorityqueue, clearChecks) {
   EXPECT_EQ(0, doubleDups.Size());
   EXPECT_EQ("", doubleDups.toString());
 }
+
+TEST(priorityqueue, equalChecks) {
+  //random test: int
+  priorityqueue<int> pq;
+  priorityqueue<int> pq2;
+
+  for (int i = 0; i < 6; i++) {
+    int rand1 = rand() % 6 + 1;
+    int rand2 = rand() % 6 + 1;
+
+    pq.enqueue(rand1, rand2);
+  }
+
+  pq2.enqueue(10, 5);
+  pq2.enqueue(5, 4);
+  pq2.enqueue(3, 8);
+  pq2.enqueue(8, 2);
+  pq2.enqueue(9, 6);
+  pq2.enqueue(1, 11);
+  pq2.enqueue(1, 11);
+  
+  pq = pq2;
+
+  EXPECT_EQ(true, pq.toString() == pq2.toString());
+  EXPECT_EQ(7, pq.Size());
+
+  //random test: string
+  priorityqueue<string> pq3;
+  priorityqueue<string> pq4;
+
+  string randos[6] = {"hi", "test", "am string", "reee", "abc", "def"};
+
+  for (int i = 0; i < 6; i++) {
+    string rand1 = randos[rand() % 6];
+    int rand2 = rand() % 6 + 1;
+
+    pq3.enqueue(rand1, rand2);
+  }
+
+  pq4.enqueue("yoink", 5);
+  pq4.enqueue("yoink", 4);
+  pq4.enqueue("yoink", 8);
+  pq4.enqueue("yoink", 2);
+  pq4.enqueue("yoink", 6);
+  pq4.enqueue("yoink", 11);
+  pq4.enqueue("yoink", 11);
+  pq4.enqueue("yoink", 11);
+  
+  pq3 = pq4;
+
+  EXPECT_EQ(true, pq.toString() == pq2.toString());
+  EXPECT_EQ(7, pq.Size());
+}
